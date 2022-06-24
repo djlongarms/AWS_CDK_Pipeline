@@ -23,7 +23,7 @@ class TensorGenericBackendPipelineStack(Stack):
                 commands=[
                     "npm install -g aws-cdk",
                     "pip install -r requirements.txt",
-                    "cdk cynth"
+                    "cdk synth"
                 ]
             )
         )
