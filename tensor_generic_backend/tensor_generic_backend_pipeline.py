@@ -28,5 +28,5 @@ class TensorGenericBackendPipelineStack(Stack):
             )
         )
 
-        deploy = TensorGenericBackendStack(self, "Deploy")
+        deploy = TensorGenericBackendStage(self, "Deploy")
         deploy_stage = pipeline.add_stage(deploy)
