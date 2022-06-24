@@ -4,7 +4,7 @@ from aws_cdk import (
     aws_codecommit as codecommit,
     pipelines as pipelines
 )
-from .tensor_generic_backend_stack import TensorGenericBackendStack
+from .tensor_generic_backend_stage import TensorGenericBackendStage
 
 class TensorGenericBackendPipelineStack(Stack):
     def __init__(self, scope: Construct, id: str, **kwargs) -> None:
