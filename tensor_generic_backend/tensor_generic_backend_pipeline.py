@@ -16,7 +16,7 @@ class TensorGenericBackendPipelineStack(Stack):
         )
 
         pipeline = pipelines.CodePipeline(
-            self, "GenericPipeline",
+            self, "GenericBackendPipeline",
             synth=pipelines.ShellStep(
                 "Synth",
                 input=pipelines.CodePipelineSource.code_commit(repo, "main"),
