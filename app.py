@@ -12,7 +12,7 @@ region_parameter = cdk.CfnParameter(app, "region", type="String",
 
 TensorGenericBackendPipelineStack(
     app, "TensorGenericBackendStack",
-    env=cdk.Environment(account=account_id, region=region)
+    env=cdk.Environment(account=account_id_parameter, region=region_parameter)
 )
 
 app.synth()
