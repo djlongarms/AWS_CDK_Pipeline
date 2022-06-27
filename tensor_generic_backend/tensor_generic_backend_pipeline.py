@@ -1,6 +1,8 @@
 from constructs import Construct
 from aws_cdk import (
     Stack,
+    Environment,
+    CfnParameter,
     aws_codecommit as codecommit,
     pipelines as pipelines
 )
@@ -9,6 +11,13 @@ from .tensor_generic_backend_stage import TensorGenericBackendStage
 class TensorGenericBackendPipelineStack(Stack):
     def __init__(self, scope: Construct, id: str, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
+
+        env = Environment(
+            account=CfnParameter(self, "accountID", type="String",
+    description="The account number where the stack will be deployed."),
+        region=CfnParameter(self, "region", type="String",
+    description="The region where the stack will be deployed.")
+        )
 
         repo = codecommit.Repository(
             self, "GenericBackendRepo",
