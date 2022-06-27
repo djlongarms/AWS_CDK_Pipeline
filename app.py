@@ -5,13 +5,7 @@ from tensor_generic_backend.tensor_generic_backend_pipeline import TensorGeneric
 app = cdk.App()
 
 TensorGenericBackendPipelineStack(
-    app, "TensorGenericBackendStack",
-    # env=cdk.Environment(
-    #     account=cdk.CfnParameter(app, "accountID", type="String",
-    # description="The account number where the stack will be deployed."),
-    #     region=cdk.CfnParameter(app, "region", type="String",
-    # description="The region where the stack will be deployed.")
-    # )
+    app, "TensorGenericBackendStack"
 )
 
 app.synth()
