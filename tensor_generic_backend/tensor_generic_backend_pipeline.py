@@ -1,5 +1,7 @@
+from os import path
 from constructs import Construct
 from aws_cdk import (
+    RemovalPolicy,
     Stack,
     Environment,
     CfnParameter,
@@ -15,20 +17,26 @@ class TensorGenericBackendPipelineStack(Stack):
         env = Environment(
             account=CfnParameter(self, "accountID", type="String",
     description="The account number where the stack will be deployed."),
-        region=CfnParameter(self, "region", type="String",
+            region=CfnParameter(self, "region", type="String",
     description="The region where the stack will be deployed.")
         )
+
+        print("Environment Set.")
 
         repo = codecommit.Repository(
             self, "GenericBackendRepo",
             repository_name="GenericBackendRepo"
         )
 
+        repo.apply_removal_policy(RemovalPolicy.DESTROY)
+
+        print("CodeCommit Repository Created.")
+
         pipeline = pipelines.CodePipeline(
             self, "GenericBackendPipeline",
             synth=pipelines.ShellStep(
                 "Synth",
-                input=pipelines.CodePipelineSource.code_commit(repo, "main"),
+                input=pipelines.CodePipelineSource.code_commit(repo, "master"),
                 commands=[
                     "npm install -g aws-cdk",
                     "pip install -r requirements.txt",
@@ -37,5 +45,15 @@ class TensorGenericBackendPipelineStack(Stack):
             )
         )
 
-        deploy = TensorGenericBackendStage(self, "Deploy")
+        print("Pipeline Created")
+
+        deploy = TensorGenericBackendStage(
+            self, "Deploy",
+            env = Environment(
+                account=env.account.value_as_string,
+                region=env.region.value_as_string
+            )
+        )
         deploy_stage = pipeline.add_stage(deploy)
+
+        print("Deployment Stage Created.")
