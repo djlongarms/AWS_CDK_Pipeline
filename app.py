@@ -8,7 +8,7 @@ TensorGenericBackendPipelineStack(
     app, "TensorGenericBackendStack",
     env=cdk.Environment(
         account='647309936627',
-        region='us-west-2'
+        region='us-west-1'
     )
 )
 

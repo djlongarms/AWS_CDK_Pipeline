@@ -36,7 +36,7 @@ class TensorGenericBackendPipelineStack(Stack):
             self, "GenericBackendPipeline",
             synth=pipelines.ShellStep(
                 "Synth",
-                input=pipelines.CodePipelineSource.code_commit(repo, "master"),
+                input=pipelines.CodePipelineSource.code_commit(repo, "main"),
                 commands=[
                     "npm install -g aws-cdk",
                     "pip install -r requirements.txt",
