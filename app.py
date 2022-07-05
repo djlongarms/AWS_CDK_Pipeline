@@ -8,13 +8,12 @@ conf = OmegaConf.load("config/config.yaml")
 app = cdk.App()
 
 TensorGenericBackendPipelineStack(
-    app, "TensorGenericBackendStackProd",
+    app, conf.resource_ids.pipeline_stack_id,
     env = cdk.Environment(
         account=conf.aws.account,
         region=conf.aws.region
     ),
-    env_name="Prod",
-    branch_name="main"
+    conf=conf
 )
 
 app.synth()
