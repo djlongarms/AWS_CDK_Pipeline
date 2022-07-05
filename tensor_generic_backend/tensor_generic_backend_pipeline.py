@@ -30,11 +30,13 @@ class TensorGenericBackendPipelineStack(Stack):
             path=path.join(path.dirname(path.dirname(__file__)), 'tensor_generic_backend.zip')
         )
 
-        repo = codecommit.Repository(
+        repo = codecommit.CfnRepository(
             self, conf.resource_ids.repo_id,
             repository_name=conf.resource_names.repo_name,
             code=codecommit.Code.from_asset(repo_code_asset, "main")
         )
+
+        print(repo.attr_clone_url_http)
 
         prod_pipeline = pipelines.CodePipeline(
             self, "{0}Prod".format(conf.resource_ids.pipeline_id),
