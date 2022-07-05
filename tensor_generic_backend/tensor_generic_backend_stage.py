@@ -6,13 +6,9 @@ from aws_cdk import (
 from .tensor_generic_backend_stack import TensorGenericBackendStack
 
 class TensorGenericBackendStage(Stage):
-    def __init__(self, scope: Construct, id: str, **kwargs):
+    def __init__(self, scope: Construct, id: str, env_name: str, **kwargs):
         super().__init__(scope, id, **kwargs)
 
         service = TensorGenericBackendStack(
-            self, "TensorGenericBackend",
-            env=Environment(
-                account=kwargs['env'].account,
-                region=kwargs['env'].region
-            )
+            self, "TensorGenericBackend{0}".format(env_name)
         )
