@@ -7,6 +7,6 @@ resource_ids:
   repo_id: GenericRepo
   pipeline_id: GenericPipeline
   pipeline_stage_id: GenericStage
-resources_names:
+resource_names:
   repo_name: GenericRepo
 
