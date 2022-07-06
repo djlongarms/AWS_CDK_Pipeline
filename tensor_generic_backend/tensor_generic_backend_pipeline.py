@@ -6,6 +6,7 @@ from aws_cdk import (
     aws_s3_assets,
     aws_codecommit as codecommit,
     pipelines as pipelines,
+    CfnOutput
 )
 from .tensor_generic_backend_stage import TensorGenericBackendStage
 
@@ -30,13 +31,16 @@ class TensorGenericBackendPipelineStack(Stack):
             path=path.join(path.dirname(path.dirname(__file__)), 'tensor_generic_backend.zip')
         )
 
-        repo = codecommit.CfnRepository(
+        repo = codecommit.Repository(
             self, conf.resource_ids.repo_id,
             repository_name=conf.resource_names.repo_name,
             code=codecommit.Code.from_asset(repo_code_asset, "main")
         )
 
-        print(repo.attr_clone_url_http)
+        self._repo_clone_url = CfnOutput(
+            self, conf.resource_ids.repo_id + "URL",
+            value=repo.repository_clone_url_http
+        )
 
         prod_pipeline = pipelines.CodePipeline(
             self, "{0}Prod".format(conf.resource_ids.pipeline_id),
