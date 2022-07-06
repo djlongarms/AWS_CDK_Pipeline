@@ -34,7 +34,7 @@ class TensorGenericBackendPipelineStack(Stack):
         repo = codecommit.Repository(
             self, conf.resource_ids.repo_id,
             repository_name=conf.resource_names.repo_name,
-            code=codecommit.Code.from_asset(repo_code_asset, "main")
+            code=codecommit.Code.from_asset(repo_code_asset, "dev")
         )
 
         self._repo_clone_url = CfnOutput(
