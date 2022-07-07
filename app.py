@@ -7,8 +7,10 @@ conf = OmegaConf.load("config/config.yaml")
 
 app = cdk.App()
 
+branch = app.node.try_get_context("branch")
+
 TensorGenericBackendPipelineStack(
-    app, conf.resource_ids.pipeline_stack_id,
+    app, f"{conf.resource_ids.pipeline_stack_id}-{branch}",
     env = cdk.Environment(
         account=conf.aws.account,
         region=conf.aws.region
