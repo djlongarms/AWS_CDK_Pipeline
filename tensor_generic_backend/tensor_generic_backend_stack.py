@@ -3,6 +3,7 @@ from aws_cdk import (
 )
 from constructs import Construct
 
+# Resource stack for deployment through pipeline
 class TensorGenericBackendStack(Stack):
 
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:

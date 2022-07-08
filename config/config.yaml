@@ -1,6 +1,7 @@
+# Application config file
 aws:
-  account: # Account Number
-  region: # Region
+  account: # Account Number (Defaults to current CLI account)
+  region: # Region (Defaults to current CLI region)
 resource_ids:
   pipeline_stack_id: GenericPipelineStack # Stack ID for Pipeline Stack
   repo_code_asset_id: GenericCodeAsset # Stack ID for Code uploaded to repo.
@@ -11,4 +12,4 @@ resource_ids:
 resource_names:
   repo_name: GenericRepo # Repository Name
 conditions:
-  CREATE_REPO: false # Boolean for Repository Creation (Default False)
+  CREATE_REPO: false # Boolean for Repository Creation (Default false)
