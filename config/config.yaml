@@ -1,14 +1,14 @@
 aws:
-  account: "647309936627"
-  region: us-west-1
+  account: # Account Number
+  region: # Region
 resource_ids:
-  pipeline_stack_id: GenericPipelineStack
-  repo_code_asset_id: GenericCodeAsset
-  repo_id: GenericRepo
-  pipeline_id: GenericPipeline
-  pipeline_stage_id: GenericDeployStage
-  stack_id: GenericStack
+  pipeline_stack_id: GenericPipelineStack # Stack ID for Pipeline Stack
+  repo_code_asset_id: GenericCodeAsset # Stack ID for Code uploaded to repo.
+  repo_id: GenericRepo # Stack ID for Repository
+  pipeline_id: GenericPipeline # Stack ID for Pipeline
+  pipeline_stage_id: GenericDeployStage # Stack ID for Deploy Stage of Pipeline
+  stack_id: GenericStack # Stack ID for Resources Stack
 resource_names:
-  repo_name: GenericRepo
+  repo_name: GenericRepo # Repository Name
 conditions:
-  CREATE_REPO: true
+  CREATE_REPO: false # Boolean for rRepository Creation (Default False)
