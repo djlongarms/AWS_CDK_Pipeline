@@ -68,8 +68,8 @@ class TensorGenericBackendPipelineStack(Stack):
         )
 
         deploy = TensorGenericBackendStage(
-            self, "{0}Prod".format(conf.resource_ids.pipeline_stage_id),
-            env_name="Prod",
+            self, f"{conf.resource_ids.pipeline_stage_id}-{branch}",
+            env_name=branch,
             conf=conf
         )
         deploy_stage = pipeline.add_stage(deploy) 
