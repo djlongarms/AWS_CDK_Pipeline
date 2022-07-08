@@ -4,7 +4,7 @@ import os
 def zip_repo_code():
 
     file_paths = []
-    exclude = set({".git", "__pycache__", ".venv", "cdk.out", "zip_file_code"})
+    exclude = set({".git", "__pycache__", ".venv", "cdk.out"})
     for root, directories, files in os.walk(os.path.dirname('./')):
         directories[:] = [d for d in directories if d not in exclude]
         
