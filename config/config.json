@@ -11,7 +11,7 @@
         "pipeline_stage_id": "GenericDeployStage",
         "stack_id": "GenericStack"
     },
-    "resources_names": {
+    "resource_names": {
         "repo_name": "GenericRepo"
     },
     "conditions": {
