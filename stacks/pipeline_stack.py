@@ -8,7 +8,8 @@ from aws_cdk import (
     aws_codecommit as codecommit,
     pipelines as pipelines,
     CfnOutput,
-    aws_codepipeline_actions as actions,
+    BundlingOptions,
+    DockerImage
 )
 from .pipeline_stage import TensorGenericBackendStage
 import json
@@ -34,8 +35,22 @@ class TensorGenericBackendPipelineStack(Stack):
             # Creates asset for uploading to repo
             repo_code_asset = aws_s3_assets.Asset(
                 self, conf['resource_ids']['repo_code_asset_id'],
-                exclude=['.venv', 'cdk.out', '.git', 'zip_file_code'],
-                path=path.join(path.dirname(path.dirname(__file__)))
+                exclude=['.venv', 'cdk.out', '.git', 'zip_file_code', 'README.md'],
+                path=path.dirname(path.dirname(__file__)),
+                bundling=BundlingOptions(
+                    image=DockerImage.from_registry(
+                        image="public.ecr.aws/docker/library/alpine:latest"
+                    ),
+                    command=[
+                        "sh",
+                        "-c",
+                        """
+                            apk update && apk add zip
+                            zip -r -j /asset-output/code.zip /asset-input/*
+                            """,
+                    ],
+                    user="root",
+                ),
             )
 
             # Creates repo
