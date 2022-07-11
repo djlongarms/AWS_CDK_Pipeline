@@ -1,7 +1,7 @@
 from aws_cdk import (
     Stack
 )
-from constructs import Construct
+from resources import Construct
 
 # Resource stack for deployment through pipeline
 class TensorGenericBackendStack(Stack):

@@ -1,4 +1,4 @@
-from constructs import Construct
+from resources import Construct
 from aws_cdk import (
     Stage
 )
