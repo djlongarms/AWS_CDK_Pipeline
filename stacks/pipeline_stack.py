@@ -9,7 +9,7 @@ from aws_cdk import (
     pipelines as pipelines,
     CfnOutput
 )
-from .tensor_generic_backend_stage import TensorGenericBackendStage
+from .pipeline_stage import TensorGenericBackendStage
 from omegaconf import OmegaConf
 
 sys.path.append(path.dirname(path.dirname(__file__)))

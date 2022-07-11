@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import aws_cdk as cdk
-from tensor_generic_backend.tensor_generic_backend_pipeline import TensorGenericBackendPipelineStack
+from stacks.pipeline_stack import TensorGenericBackendPipelineStack
 from omegaconf import OmegaConf
 
 # Initializes App

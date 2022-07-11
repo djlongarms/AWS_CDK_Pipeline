@@ -1,7 +1,7 @@
 import aws_cdk as core
 import aws_cdk.assertions as assertions
 
-from tensor_generic_backend.tensor_generic_backend_stack import TensorGenericBackendStack
+from stacks.resource_stack import TensorGenericBackendStack
 
 # example tests. To run these tests, uncomment this file along with the example
 # resource in tensor_generic_backend/tensor_generic_backend_stack.py

@@ -2,7 +2,7 @@ from constructs import Construct
 from aws_cdk import (
     Stage
 )
-from .tensor_generic_backend_stack import TensorGenericBackendStack
+from .resource_stack import TensorGenericBackendStack
 
 # Deployment stage for automatically deploying associated stack resources
 class TensorGenericBackendStage(Stage):
