@@ -29,13 +29,13 @@ class TensorGenericBackendPipelineStack(Stack):
                 json.dump(conf, f)
 
             # Zips code for uploading to repo
-            zip_repo_code()
+            # zip_repo_code()
             
             # Creates asset for uploading to repo
             repo_code_asset = aws_s3_assets.Asset(
                 self, conf['resource_ids']['repo_code_asset_id'],
-                exclude=['.venv', 'cdk.out', '.git'],
-                path=path.join(path.dirname(path.dirname(__file__)), 'tensor_generic_backend.zip')
+                exclude=['.venv', 'cdk.out', '.git', 'zip_file_code'],
+                path=path.join(path.dirname(path.dirname(__file__)))
             )
 
             # Creates repo
