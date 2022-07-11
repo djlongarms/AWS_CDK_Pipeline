@@ -12,10 +12,10 @@
         "stack_id": "GenericStack"
     },
     "resource_names": {
-        "repo_name": "GenericRepo"
+        "repo_name": "ZipCodeTestRepo"
     },
     "conditions": {
-        "CREATE_REPO": false
+        "CREATE_REPO": true
     },
     "branches": {
         "main": {
