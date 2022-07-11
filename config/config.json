@@ -41,6 +41,14 @@
                     "manual_approval": false
                 }
             ]
+        },
+        "dev-zip": {
+            "stages": [
+                {
+                    "stage_name": "DevZipTest",
+                    "manual_approval": false
+                }
+            ]
         }
 }
 }
