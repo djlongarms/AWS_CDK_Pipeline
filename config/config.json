@@ -19,10 +19,25 @@
     },
     "branches": {
         "main": {
-
+            "stages": [
+                {
+                    "stage_name": "QA",
+                    "manual_approval": true
+                },
+                {
+                    "stage_name": "Staging",
+                    "manual_approval": true
+                },
+                {
+                    "stage_name": "Production",
+                    "manual_approval": false
+                }
+            ]
         },
         "dev": {
-            
+            "stages": [
+                "Development"
+            ]
         }
 }
 }

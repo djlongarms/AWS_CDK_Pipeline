@@ -7,7 +7,8 @@ from aws_cdk import (
     aws_s3_assets,
     aws_codecommit as codecommit,
     pipelines as pipelines,
-    CfnOutput
+    CfnOutput,
+    aws_codepipeline_actions as actions,
 )
 from .pipeline_stage import TensorGenericBackendStage
 import json
@@ -77,11 +78,16 @@ class TensorGenericBackendPipelineStack(Stack):
         )
 
         # Iterates over stages wanted for the current branch
-        for stage in conf['branch']['stages']:
+        for stage in conf['branches'][branch]['stages']:
             # Creates deploy stage for pipeline to automatically deploy code from given branch
             deploy = TensorGenericBackendStage(
-                self, f"{conf['resource_ids']['pipeline_stage_id']}-{branch}",
-                env_name=branch,
+                self, f"{conf['resource_ids']['pipeline_stage_id']}-{stage['stage_name']}",
+                env_name=stage['stage_name'],
+                manual_approval=stage['manual_approval'],
                 conf=conf
             )
             deploy_stage = pipeline.add_stage(deploy)
+            deploy_stage.add_action(actions.ManualApprovalAction(
+                action_name="Approve"
+            ))
+
