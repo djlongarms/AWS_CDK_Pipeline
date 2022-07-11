@@ -36,7 +36,10 @@
         },
         "dev": {
             "stages": [
-                "Development"
+                {
+                    "stage_name": "Development",
+                    "manual_approval": false
+                }
             ]
         }
 }
