@@ -86,8 +86,14 @@ class TensorGenericBackendPipelineStack(Stack):
                 manual_approval=stage['manual_approval'],
                 conf=conf
             )
-            deploy_stage = pipeline.add_stage(deploy)
-            deploy_stage.add_action(actions.ManualApprovalAction(
-                action_name="Approve"
-            ))
+
+            post = []
+
+            if stage['manual_approval']:
+                post.append(pipelines.ManualApprovalStep("Approve"))
+
+            deploy_stage = pipeline.add_stage(
+                deploy,
+                post=post
+            )
 
