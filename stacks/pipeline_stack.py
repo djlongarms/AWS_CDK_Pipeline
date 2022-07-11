@@ -10,7 +10,7 @@ from aws_cdk import (
     CfnOutput
 )
 from .pipeline_stage import TensorGenericBackendStage
-from omegaconf import OmegaConf
+import json
 
 sys.path.append(path.dirname(path.dirname(__file__)))
 from zip_file_code.zip_file_code import zip_repo_code
@@ -21,25 +21,26 @@ class TensorGenericBackendPipelineStack(Stack):
         super().__init__(scope, id, **kwargs)
 
         # Check if user wants repo created by stack
-        if conf.conditions.CREATE_REPO:
+        if conf['conditions']['CREATE_REPO']:
             # Sets condition to false for future deployments
-            conf.conditions.CREATE_REPO = False
-            OmegaConf.save(config=conf, f=path.join(path.dirname(path.dirname(__file__)), "config/config.yaml"))
+            conf['conditions']['CREATE_REPO'] = False
+            with open(path.join(path.dirname(path.dirname(__file__)), "config/config.json"), 'w') as f:
+                json.dump(conf, f)
 
             # Zips code for uploading to repo
             zip_repo_code()
             
             # Creates asset for uploading to repo
             repo_code_asset = aws_s3_assets.Asset(
-                self, conf.resource_ids.repo_code_asset_id,
+                self, conf['resource_ids']['repo_code_asset_id'],
                 exclude=['.venv', 'cdk.out', '.git'],
                 path=path.join(path.dirname(path.dirname(__file__)), 'tensor_generic_backend.zip')
             )
 
             # Creates repo
             repo = codecommit.Repository(
-                self, conf.resource_ids.repo_id,
-                repository_name=conf.resource_names.repo_name,
+                self, conf['resource_ids']['repo_id'],
+                repository_name=conf['resource_names']['repo_name'],
                 code=codecommit.Code.from_asset(repo_code_asset, branch)
             )
 
@@ -48,19 +49,19 @@ class TensorGenericBackendPipelineStack(Stack):
 
             # Outputs repo clone url for easy connection to new repo.
             self._repo_clone_url = CfnOutput(
-                self, conf.resource_ids.repo_id + "URL",
+                self, conf['resource_ids']['repo_id'] + "URL",
                 value=repo.repository_clone_url_http
             )
         else:
             # Connects to already existing repo
             repo = codecommit.Repository.from_repository_name(
-                self, conf.resource_ids.repo_id,
-                repository_name=conf.resource_names.repo_name
+                self, conf['resource_ids']['repo_id'],
+                repository_name=conf['resource_names']['repo_name']
             )
 
         # Creates pipeline using given branch name as distinguishing factor
         pipeline = pipelines.CodePipeline(
-            self, f"{conf.resource_ids.pipeline_id}-{branch}",
+            self, f"{conf['resource_ids']['pipeline_id']}-{branch}",
             synth=pipelines.ShellStep(
                 "Synth",
                 input=pipelines.CodePipelineSource.code_commit(repo, branch),
@@ -75,10 +76,12 @@ class TensorGenericBackendPipelineStack(Stack):
             )
         )
 
-        # Creates deploy stage for pipeline to automatically deploy code from given branch
-        deploy = TensorGenericBackendStage(
-            self, f"{conf.resource_ids.pipeline_stage_id}-{branch}",
-            env_name=branch,
-            conf=conf
-        )
-        deploy_stage = pipeline.add_stage(deploy) 
+        # Iterates over stages wanted for the current branch
+        for stage in conf['branch']['stages']:
+            # Creates deploy stage for pipeline to automatically deploy code from given branch
+            deploy = TensorGenericBackendStage(
+                self, f"{conf['resource_ids']['pipeline_stage_id']}-{branch}",
+                env_name=branch,
+                conf=conf
+            )
+            deploy_stage = pipeline.add_stage(deploy)

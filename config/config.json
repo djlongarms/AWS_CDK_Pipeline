@@ -1,0 +1,20 @@
+{
+    "aws": {
+        "account": null,
+        "region": null
+    },
+    "resource_ids": {
+        "pipeline_stack_id": "GenericPipelineStack",
+        "repo_code_asset_id": "GenericCodeAsset",
+        "repo_id": "GenericRepo",
+        "pipeline_id": "GenericPipeline",
+        "pipeline_stage_id": "GenericDeployStage",
+        "stack_id": "GenericStack"
+    },
+    "resources_names": {
+        "repo_name": "GenericRepo"
+    },
+    "conditions": {
+        "CREATE_REPO": false
+    }
+}
