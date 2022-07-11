@@ -82,7 +82,7 @@ class TensorGenericBackendPipelineStack(Stack):
             # Creates deploy stage for pipeline to automatically deploy code from given branch
             deploy = TensorGenericBackendStage(
                 self, f"{conf['resource_ids']['pipeline_stage_id']}-{stage['stage_name']}",
-                env_name=stage['stage_name'],
+                stage_name=stage['stage_name'],
                 manual_approval=stage['manual_approval'],
                 conf=conf
             )
