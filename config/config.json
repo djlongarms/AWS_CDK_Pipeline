@@ -16,5 +16,13 @@
     },
     "conditions": {
         "CREATE_REPO": false
-    }
+    },
+    "branches": {
+        "main": {
+
+        },
+        "dev": {
+            
+        }
+}
 }
