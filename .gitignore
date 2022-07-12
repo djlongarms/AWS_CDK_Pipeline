@@ -8,6 +8,3 @@ __pycache__
 # CDK asset staging directory
 .cdk.staging
 cdk.out
-
-# CodeCommit Code Artifact
-tensor_generic_backend.zip

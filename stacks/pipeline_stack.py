@@ -1,6 +1,5 @@
 from os import path
-import sys
-from resources import Construct
+from constructs import Construct
 from aws_cdk import (
     RemovalPolicy,
     Stack,
@@ -8,13 +7,11 @@ from aws_cdk import (
     aws_codecommit as codecommit,
     pipelines as pipelines,
     CfnOutput,
-    aws_codepipeline_actions as actions,
+    BundlingOptions,
+    DockerImage
 )
 from .pipeline_stage import TensorGenericBackendStage
 import json
-
-sys.path.append(path.dirname(path.dirname(__file__)))
-from zip_file_code.zip_file_code import zip_repo_code
 
 # Pipeline Stack class
 class TensorGenericBackendPipelineStack(Stack):
@@ -27,15 +24,25 @@ class TensorGenericBackendPipelineStack(Stack):
             conf['conditions']['CREATE_REPO'] = False
             with open(path.join(path.dirname(path.dirname(__file__)), "config/config.json"), 'w') as f:
                 json.dump(conf, f)
-
-            # Zips code for uploading to repo
-            # zip_repo_code()
             
             # Creates asset for uploading to repo
             repo_code_asset = aws_s3_assets.Asset(
                 self, conf['resource_ids']['repo_code_asset_id'],
-                exclude=['.venv', 'cdk.out', '.git', 'zip_file_code'],
-                path=path.dirname(path.dirname(__file__))
+                path=path.dirname(path.dirname(__file__)),
+                bundling=BundlingOptions(
+                    image=DockerImage.from_registry(
+                        image="public.ecr.aws/docker/library/alpine:latest"
+                    ),
+                    command=[
+                        "sh",
+                        "-c",
+                        """
+                            apk update && apk add zip
+                            zip -r /asset-output/code.zip ./* -x "./cdk.out/*"
+                            """,
+                    ],
+                    user="root",
+                ),
             )
 
             # Creates repo
