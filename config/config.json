@@ -15,7 +15,7 @@
         "repo_name": "GenericRepo"
     },
     "conditions": {
-        "CREATE_REPO": true
+        "CREATE_REPO": false
     },
     "branches": {
         "main": {

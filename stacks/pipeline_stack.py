@@ -23,7 +23,7 @@ class TensorGenericBackendPipelineStack(Stack):
             # Sets condition to false for future deployments
             conf['conditions']['CREATE_REPO'] = False
             with open(path.join(path.dirname(path.dirname(__file__)), "config/config.json"), 'w') as f:
-                json.dump(conf, f)
+                json.dump(conf, f, indent=4)
             
             # Creates asset for uploading to repo
             repo_code_asset = aws_s3_assets.Asset(
