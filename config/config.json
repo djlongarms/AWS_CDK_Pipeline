@@ -12,7 +12,7 @@
         "stack_id": "GenericStack"
     },
     "resource_names": {
-        "repo_name": "ZipCodeTestRepo"
+        "repo_name": "GenericRepo"
     },
     "conditions": {
         "CREATE_REPO": true
@@ -41,14 +41,6 @@
                     "manual_approval": false
                 }
             ]
-        },
-        "dev-zip": {
-            "stages": [
-                {
-                    "stage_name": "DevZipTest",
-                    "manual_approval": false
-                }
-            ]
         }
-}
+    }
 }
