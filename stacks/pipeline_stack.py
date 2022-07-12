@@ -1,5 +1,4 @@
 from os import path
-import sys
 from constructs import Construct
 from aws_cdk import (
     RemovalPolicy,
@@ -14,9 +13,6 @@ from aws_cdk import (
 from .pipeline_stage import TensorGenericBackendStage
 import json
 
-sys.path.append(path.dirname(path.dirname(__file__)))
-from zip_file_code.zip_file_code import zip_repo_code
-
 # Pipeline Stack class
 class TensorGenericBackendPipelineStack(Stack):
     def __init__(self, scope: Construct, id: str, conf, branch, **kwargs) -> None:
@@ -28,14 +24,10 @@ class TensorGenericBackendPipelineStack(Stack):
             conf['conditions']['CREATE_REPO'] = False
             with open(path.join(path.dirname(path.dirname(__file__)), "config/config.json"), 'w') as f:
                 json.dump(conf, f)
-
-            # Zips code for uploading to repo
-            # zip_repo_code()
             
             # Creates asset for uploading to repo
             repo_code_asset = aws_s3_assets.Asset(
                 self, conf['resource_ids']['repo_code_asset_id'],
-                exclude=['.venv', 'cdk.out', '.git', 'zip_file_code', 'README.md'],
                 path=path.dirname(path.dirname(__file__)),
                 bundling=BundlingOptions(
                     image=DockerImage.from_registry(
@@ -46,7 +38,7 @@ class TensorGenericBackendPipelineStack(Stack):
                         "-c",
                         """
                             apk update && apk add zip
-                            zip -r -j /asset-output/code.zip /asset-input/*
+                            zip -r /asset-output/code.zip ./* -x "./cdk.out/*"
                             """,
                     ],
                     user="root",
