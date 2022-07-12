@@ -13,17 +13,19 @@ When attempting to deploy this code for a project, the following should be done 
 
 2. Create a virtual environment, source the environment, and install the items in the 'requirements.txt' file.
 
-3. Connect your local repo to a new AWS CodeCommit repository and upload this code into that repsository under whatever branch name you'd like as the default branch for the project. This repository must be in the same account and region you'd like to deploy these pipelines.
+3. Run `git init` and connect your local repo to a new AWS CodeCommit repository. Upload this code into that repsository under whatever branch name you'd like as the default branch for the project. For now, this repository must be in the same account and region you'd like to deploy these pipelines.
 
-4. Modify the 'config.yaml' file. The items in this file are the ids/names for the basic resources needed for this project to work, so make sure the naming scheme reflects what you want for the project.
+4. Modify the 'config.json' file. The items in this file are the ids/names for the basic resources needed for this project to work, so make sure the naming scheme reflects what you want for the project.
 
-5. In particular, make sure the 'repo_name' attribute of the config.yaml file is the same as the name of the AWS CodeCommit repo you connected to before. (More on this in section VI)
+6. In particular, make sure the 'repo_name' attribute of the config.json file is the same as the name of the AWS CodeCommit repo you connected to before. (More on this in section VI)
 
-6. Commit and push this code into the AWS CodeCommit repository.
+5. Under the `branches` section of the config.json, modify the keys to reflect the branches you'd like to have in the repository. Each branch item should have a list object named `stages` in it. This list must be comprised of dictionary objects containing the stage name(`stage_name`) and whether or not the stage should have a manual approval(`manual_approval`) after the stage is complete.
 
-7. Run `cdk deploy -c branch=<branch_name>` with '<branch_name>' replaced with the name of your default branch to deploy the stack for the first time. The stack will create the pipeline and connect it to the 'main' branch of the repository.
+7. Commit and push this code into the AWS CodeCommit repository.
 
-8. Your initial stack is now deployed! You can view the progress of the pipeline in AWS CodePipeline.
+8. Run `cdk deploy -c branch=<branch_name>` with '<branch_name>' replaced with the name of your default branch to deploy the stack for the first time. The stack will create the pipeline and connect it to the '<branch_name>' branch of the repository.
+
+9. Your initial stack is now deployed! You can view the progress of the pipeline in AWS CodePipeline.
 
 This will create one environment for your resources, with a pipeline to deploy those resources as you add/modify them using the AWS CDK. This will be explained more in section V of the README.
 
@@ -69,4 +71,4 @@ If you are using the first method, where the repo is created as part of your cdk
 
 The preferred method is to create the repository manually, then reference it inside your cdk stack to avoid these issues.
 
-If you still wish to have the stack create a repository for you, modify the config.yaml file so that the CREATE_REPO condition is 'true' instead of 'false,' then make sure to leave it alone. Deploying the stack will switch it back to 'false' once the repository has been added to the stack creation code.
+If you still wish to have the stack create a repository for you, modify the config.json file so that the CREATE_REPO condition is 'true' instead of 'false,' then make sure to leave it alone. Deploying the stack will switch it back to 'false' once the repository has been added to the stack creation code.
