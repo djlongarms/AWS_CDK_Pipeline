@@ -1,6 +1,7 @@
 from os import path
 from constructs import Construct
 from aws_cdk import (
+    Environment,
     RemovalPolicy,
     Stack,
     aws_s3_assets,
@@ -70,6 +71,7 @@ class TensorGenericBackendPipelineStack(Stack):
         # Creates pipeline using given branch name as distinguishing factor
         pipeline = pipelines.CodePipeline(
             self, f"{conf['resource_ids']['pipeline_id']}-{branch}",
+            cross_account_keys=True,
             synth=pipelines.ShellStep(
                 "Synth",
                 input=pipelines.CodePipelineSource.code_commit(repo, branch),
@@ -84,11 +86,18 @@ class TensorGenericBackendPipelineStack(Stack):
             )
         )
 
+        # Retrieves branch info from config file
+        branch_info = conf['branches'][branch]
+
         # Iterates over stages wanted for the current branch
-        for stage in conf['branches'][branch]['stages']:
+        for stage in branch_info['stages']:
             # Creates deploy stage for pipeline to automatically deploy code from given branch
             deploy = TensorGenericBackendStage(
                 self, f"{conf['resource_ids']['pipeline_stage_id']}-{stage['stage_name']}",
+                env=Environment(
+                    account=branch_info['account'],
+                    region=branch_info['region']
+                ),
                 stage_name=stage['stage_name'],
                 manual_approval=stage['manual_approval'],
                 conf=conf

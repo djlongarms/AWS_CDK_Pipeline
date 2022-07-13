@@ -1,7 +1,9 @@
 {
     "aws": {
-        "account": null,
-        "region": null
+        "description": "Main account in which the code repo will be created.",
+        "account": "647309936627",
+        "region": "us-west-1",
+        "cli_profile": "default"
     },
     "resource_ids": {
         "pipeline_stack_id": "GenericPipelineStack",
@@ -35,6 +37,8 @@
             ]
         },
         "dev": {
+            "account": "776701983001",
+            "region": "us-west-1",
             "stages": [
                 {
                     "stage_name": "Development",
