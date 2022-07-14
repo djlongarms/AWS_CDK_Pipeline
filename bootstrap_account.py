@@ -7,7 +7,10 @@ tools_account = conf['aws']['account']
 region = conf['aws']['region']
 cli_profile = conf['aws']['cli_profile']
 
-os.system(f"cdk bootstrap {tools_account}/{region} --no-bootstrap-customer-key --cloudformation-execution-policies 'arn:aws:iam::aws:policy/AdministratorAccess' --profile {cli_profile} -c branch=dev")
+if tools_account is not None and region is not None:
+    os.system(f"cdk bootstrap {tools_account}/{region} --no-bootstrap-customer-key --cloudformation-execution-policies 'arn:aws:iam::aws:policy/AdministratorAccess' --profile {cli_profile} -c branch=dev")
+else:
+    os.system("cdk bootstrap")
 
 bootstrapped_accounts = {
     tools_account: [region]
@@ -19,6 +22,9 @@ for branch in branches:
         account = stage['account']
         region = stage['region']
         cli_profile = stage['cli_profile']
+
+        if account is None:
+            continue
 
         current_account = bootstrapped_accounts.get(account)
 

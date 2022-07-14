@@ -1,9 +1,9 @@
 {
     "aws": {
         "description": "Main account in which the code repo will be created.",
-        "account": "647309936627",
-        "region": "us-west-1",
-        "cli_profile": "default"
+        "account": null,
+        "region": null,
+        "cli_profile": null
     },
     "resource_ids": {
         "pipeline_stack_id": "GenericPipelineStack",
@@ -23,33 +23,33 @@
         "main": {
             "stages": [
                 {
-                    "account": "647309936627",
-                    "region": "us-west-1",
+                    "account": null,
+                    "region": null,
                     "stage_name": "QA",
                     "manual_approval": true,
-                    "cli_profile": "default"
+                    "cli_profile": null
                 },
                 {
-                    "account": "776701983001",
-                    "region": "us-west-2",
+                    "account": null,
+                    "region": null,
                     "stage_name": "Staging",
                     "manual_approval": true,
-                    "cli_profile": "personal"
+                    "cli_profile": null
                 },
                 {
-                    "account": "647309936627",
-                    "region": "us-west-2",
+                    "account": null,
+                    "region": null,
                     "stage_name": "Production",
                     "manual_approval": false,
-                    "cli_profile": "default"
+                    "cli_profile": null
                 }
             ]
         },
         "dev": {
             "stages": [
                 {
-                    "account": "776701983001",
-                    "region": "us-west-1",
+                    "account": null,
+                    "region": null,
                     "stage_name": "Development",
                     "manual_approval": false,
                     "cli_profile": "personal"
