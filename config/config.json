@@ -52,7 +52,7 @@
                     "region": null,
                     "stage_name": "Development",
                     "manual_approval": false,
-                    "cli_profile": "personal"
+                    "cli_profile": null
                 }
             ]
         }
