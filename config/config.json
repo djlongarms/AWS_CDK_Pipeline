@@ -1,0 +1,46 @@
+{
+    "aws": {
+        "account": null,
+        "region": null
+    },
+    "resource_ids": {
+        "pipeline_stack_id": "GenericPipelineStack",
+        "repo_code_asset_id": "GenericCodeAsset",
+        "repo_id": "GenericRepo",
+        "pipeline_id": "GenericPipeline",
+        "pipeline_stage_id": "GenericDeployStage",
+        "stack_id": "GenericStack"
+    },
+    "resource_names": {
+        "repo_name": "GenericRepo"
+    },
+    "conditions": {
+        "CREATE_REPO": false
+    },
+    "branches": {
+        "main": {
+            "stages": [
+                {
+                    "stage_name": "QA",
+                    "manual_approval": true
+                },
+                {
+                    "stage_name": "Staging",
+                    "manual_approval": true
+                },
+                {
+                    "stage_name": "Production",
+                    "manual_approval": false
+                }
+            ]
+        },
+        "dev": {
+            "stages": [
+                {
+                    "stage_name": "Development",
+                    "manual_approval": false
+                }
+            ]
+        }
+    }
+}
