@@ -7,14 +7,16 @@ tools_account = conf['aws']['account']
 region = conf['aws']['region']
 cli_profile = conf['aws']['cli_profile']
 
-if tools_account is not None and region is not None:
-    os.system(f"cdk bootstrap {tools_account}/{region} --no-bootstrap-customer-key --cloudformation-execution-policies 'arn:aws:iam::aws:policy/AdministratorAccess' --profile {cli_profile} -c branch=dev")
-else:
-    os.system("cdk bootstrap -c branch=dev")
+if tools_account is None or region is None or cli_profile is None:
+    print("Please ensure Account Number, Region, and CLI Profile for tools account is set in the config.json file.")
+    exit()
+
+os.system(f"cdk bootstrap {tools_account}/{region} --no-bootstrap-customer-key --cloudformation-execution-policies 'arn:aws:iam::aws:policy/AdministratorAccess' --profile {cli_profile} -c branch=dev")
 
 bootstrapped_accounts = {
     tools_account: [region]
 }
+
 branches = conf['branches']
 
 for branch in branches:
