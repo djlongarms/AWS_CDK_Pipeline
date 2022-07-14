@@ -95,11 +95,10 @@ class TensorGenericBackendPipelineStack(Stack):
             deploy = TensorGenericBackendStage(
                 self, f"{conf['resource_ids']['pipeline_stage_id']}-{stage['stage_name']}",
                 env=Environment(
-                    account=branch_info['account'],
-                    region=branch_info['region']
+                    account=stage['account'],
+                    region=stage['region']
                 ),
                 stage_name=stage['stage_name'],
-                manual_approval=stage['manual_approval'],
                 conf=conf
             )
 

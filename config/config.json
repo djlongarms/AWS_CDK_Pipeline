@@ -23,26 +23,36 @@
         "main": {
             "stages": [
                 {
+                    "account": "647309936627",
+                    "region": "us-west-1",
                     "stage_name": "QA",
-                    "manual_approval": true
+                    "manual_approval": true,
+                    "cli_profile": "default"
                 },
                 {
+                    "account": "776701983001",
+                    "region": "us-west-2",
                     "stage_name": "Staging",
-                    "manual_approval": true
+                    "manual_approval": true,
+                    "cli_profile": "personal"
                 },
                 {
+                    "account": "647309936627",
+                    "region": "us-west-2",
                     "stage_name": "Production",
-                    "manual_approval": false
+                    "manual_approval": false,
+                    "cli_profile": "default"
                 }
             ]
         },
         "dev": {
-            "account": "776701983001",
-            "region": "us-west-1",
             "stages": [
                 {
+                    "account": "776701983001",
+                    "region": "us-west-1",
                     "stage_name": "Development",
-                    "manual_approval": false
+                    "manual_approval": false,
+                    "cli_profile": "personal"
                 }
             ]
         }

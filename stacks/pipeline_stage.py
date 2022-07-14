@@ -6,7 +6,7 @@ from .resource_stack import TensorGenericBackendStack
 
 # Deployment stage for automatically deploying associated stack resources
 class TensorGenericBackendStage(Stage):
-    def __init__(self, scope: Construct, id: str, stage_name: str, manual_approval: bool, conf, **kwargs):
+    def __init__(self, scope: Construct, id: str, stage_name: str, conf, **kwargs):
         super().__init__(scope, id, **kwargs)
 
         # Initializes Stack with names based on branch name
