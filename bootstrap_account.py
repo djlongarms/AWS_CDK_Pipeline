@@ -10,7 +10,7 @@ cli_profile = conf['aws']['cli_profile']
 if tools_account is not None and region is not None:
     os.system(f"cdk bootstrap {tools_account}/{region} --no-bootstrap-customer-key --cloudformation-execution-policies 'arn:aws:iam::aws:policy/AdministratorAccess' --profile {cli_profile} -c branch=dev")
 else:
-    os.system("cdk bootstrap")
+    os.system("cdk bootstrap -c branch=dev")
 
 bootstrapped_accounts = {
     tools_account: [region]
