@@ -1,11 +1,12 @@
 {
     "aws": {
-        "description": "Main account in which the code repo will be created.",
+        "description": "Details for main account in which the code repo will be created.",
         "account": null,
         "region": null,
         "cli_profile": null
     },
     "resource_ids": {
+        "description": "Stack IDs for pipeline/stage/stack resources deployed to accounts.",
         "pipeline_stack_id": "GenericPipelineStack",
         "repo_code_asset_id": "GenericCodeAsset",
         "repo_id": "GenericRepo",
@@ -14,32 +15,35 @@
         "stack_id": "GenericStack"
     },
     "resource_names": {
+        "description": "Names for pipeline/stage/stack resources deployed to accounts.",
         "repo_name": "GenericRepo"
     },
     "conditions": {
+        "description": "Conditions for creating resources in stack.",
         "CREATE_REPO": false
     },
     "branches": {
+        "description": "Branches to be used in associated repo for initializing separate environments/stages.",
         "main": {
             "stages": [
                 {
                     "account": null,
                     "region": null,
-                    "stage_name": "QA",
+                    "stage_name": "StageOne",
                     "manual_approval": true,
                     "cli_profile": null
                 },
                 {
                     "account": null,
                     "region": null,
-                    "stage_name": "Staging",
+                    "stage_name": "StageTwo",
                     "manual_approval": true,
                     "cli_profile": null
                 },
                 {
                     "account": null,
                     "region": null,
-                    "stage_name": "Production",
+                    "stage_name": "StageThree",
                     "manual_approval": false,
                     "cli_profile": null
                 }
@@ -50,7 +54,7 @@
                 {
                     "account": null,
                     "region": null,
-                    "stage_name": "Development",
+                    "stage_name": "StageDev",
                     "manual_approval": false,
                     "cli_profile": null
                 }
