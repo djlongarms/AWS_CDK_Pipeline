@@ -23,7 +23,6 @@
         "CREATE_REPO": false
     },
     "branches": {
-        "description": "Branches to be used in associated repo for initializing separate environments/stages.",
         "main": {
             "stages": [
                 {
