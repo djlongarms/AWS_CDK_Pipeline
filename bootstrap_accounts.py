@@ -14,16 +14,16 @@ if tools_account is None or region is None or cli_profile is None:
     print("Please ensure Account Number, Region, and CLI Profile for tools account is set in the config.json file.")
     exit()
 
+# Retrieves all desired branches
+branches = conf['branches']
+
 # Bootstraps tools account and region for CDK compatibility
-os.system(f"cdk bootstrap {tools_account}/{region} --no-bootstrap-customer-key --cloudformation-execution-policies 'arn:aws:iam::aws:policy/AdministratorAccess' --profile {cli_profile} -c branch=dev")
+os.system(f"cdk bootstrap {tools_account}/{region} --no-bootstrap-customer-key --cloudformation-execution-policies 'arn:aws:iam::aws:policy/AdministratorAccess' --profile {cli_profile} -c branch={list(branches)[0]}")
 
 # Keeps track of bootstrapped accounts and regions so no account/region coombo gets bootstrapped twice
 bootstrapped_accounts = {
     tools_account: [region]
 }
-
-# Retrieves all desired branches
-branches = conf['branches']
 
 # Iterates over each branch
 for branch in branches:
@@ -55,4 +55,4 @@ for branch in branches:
             continue
 
         # If reaching this point, bootstrap account and region with policy that trusts tools account to deploy to this account and region
-        os.system(f"cdk bootstrap {account}/{region} --no-bootstrap-customer-key --cloudformation-execution-policies 'arn:aws:iam::aws:policy/AdministratorAccess' --trust {tools_account} --trust-for-lookup {tools_account} --profile {cli_profile} -c branch=dev")
+        os.system(f"cdk bootstrap {account}/{region} --no-bootstrap-customer-key --cloudformation-execution-policies 'arn:aws:iam::aws:policy/AdministratorAccess' --trust {tools_account} --trust-for-lookup {tools_account} --profile {cli_profile} -c branch={branch}")
