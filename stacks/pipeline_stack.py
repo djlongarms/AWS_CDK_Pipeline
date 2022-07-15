@@ -1,5 +1,6 @@
 from os import path
 from constructs import Construct
+import json
 from aws_cdk import (
     Environment,
     RemovalPolicy,
@@ -11,8 +12,8 @@ from aws_cdk import (
     BundlingOptions,
     DockerImage
 )
+
 from .pipeline_stage import TensorGenericBackendStage
-import json
 
 # Pipeline Stack class
 class TensorGenericBackendPipelineStack(Stack):
