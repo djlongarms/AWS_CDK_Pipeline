@@ -5,6 +5,8 @@ This code is meant to serve as the basis for backend projects being built using 
 
 This is achieved by creating a stack which connects to an AWS CodeCommit repository and running code from each branch desired by the developers into its own pipeline to create different environments as desired.
 
+![An example layout of a deployment from AWS CDK on a personal computer, deploying resources to multiple AWS accounts.](imgs/CDK_Pipeline.jpg?raw=true "Example deployment from AWS CDK to multiple accounts.")
+
 # II. Deploying the First Pipeline
 
 When attempting to deploy this code for a project, the following should be done the first time:
