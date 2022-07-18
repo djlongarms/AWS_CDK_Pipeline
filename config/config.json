@@ -23,6 +23,17 @@
         "CREATE_REPO": false
     },
     "branches": {
+        "dev": {
+            "stages": [
+                {
+                    "account": null,
+                    "region": null,
+                    "stage_name": "StageDev",
+                    "manual_approval": false,
+                    "cli_profile": null
+                }
+            ]
+        },
         "main": {
             "stages": [
                 {
@@ -43,17 +54,6 @@
                     "account": null,
                     "region": null,
                     "stage_name": "StageThree",
-                    "manual_approval": false,
-                    "cli_profile": null
-                }
-            ]
-        },
-        "dev": {
-            "stages": [
-                {
-                    "account": null,
-                    "region": null,
-                    "stage_name": "StageDev",
                     "manual_approval": false,
                     "cli_profile": null
                 }
