@@ -12,5 +12,6 @@ class TensorGenericBackendStage(Stage):
 
         # Initializes Stack with names based on branch name
         service = TensorGenericBackendStack(
-            self, f"{conf['resource_ids']['stack_id']}-{stage_name}"
+            self, f"{conf['resource_ids']['stack_id']}-{stage_name}",
+            conf=conf
         )
