@@ -7,7 +7,7 @@ This is achieved by creating a stack which connects to an AWS CodeCommit reposit
 
 ![An example layout of a deployment from AWS CDK on a personal computer, deploying resources to multiple AWS accounts.](imgs/CDK_Pipeline.jpg?raw=true "Example deployment from AWS CDK to multiple accounts.")
 
-# II. Deploying the First Pipeline
+# II. Deploying the First Pipeline(s)
 
 When attempting to deploy this code for a project, the following should be done the first time:
 
@@ -23,25 +23,25 @@ When attempting to deploy this code for a project, the following should be done 
 
 6. Under the `branches` section of the config.json, modify the keys to reflect the branches you'd like to have in the repository. Each branch item should have a list object named `stages` in it. This list must be comprised of dictionary objects containing the following: an account number and region where this stage will be deployed, the AWS CLI Profile name with credentials for the given account, the stage name for the stage, and whether or not the stage should have a manual approval after the stage is complete. The account number and region can be left null for a stage if you want that stage in the same account and region as the "tools" account.
 
-7. Once the `aws` section and stages have their account details filled in, run the `bootstrap_accounts.py` script to bootstrap all necessary accounts for deployment through cdk. Cross account access will also be taken care of through this process.
+7. Commit and push this code into the AWS CodeCommit repository. Make sure to create and push each of the branches you created in the `branches` section of the config file.
 
-8. Commit and push this code into the AWS CodeCommit repository.
+8. Run the provided `deploy_all.py` script in the root folder of the project.
 
-9. Run `cdk deploy -c branch=<branch_name>` with '<branch_name>' replaced with the name of your default branch to deploy the stack for the first time. The stack will create the pipeline and connect it to the '<branch_name>' branch of the repository.
-
-10. Your initial stack is now deployed! You can view the progress of the pipeline in AWS CodePipeline.
+9. Your initial stack or stacks is now deployed! You can view the progress of the pipeline in AWS CodePipeline.
 
 This will create one environment for your resources, with a pipeline to deploy those resources as you add/modify them using the AWS CDK. This will be explained more in section V of the README.
 
 # III. Deploying Subsequent Pipelines
 
-Once the first pipeline is deployed, you may wish to create more pipelines for separate coding environments. This can be done with the following:
+Once the first set of pipelines is deployed, you may wish to create more pipelines for separate coding environments. This can be done with the following:
 
 1. Create a new local branch and push it up the connected Repository.
 
-2. Run `cdk deploy -c branch=<branch_name>` with '<branch_name>' replaced with the name of the new branch.
+2. Add a new branch to the `branches` section of the config file with the relevant fields needed for deployment.
 
-3. Your new stack is now deployed! This will create a brand new pipeline, unconnected to already existing pipelines.
+3. Run `cdk deploy -c branch=<branch_name>` with '<branch_name>' replaced with the name of the new branch.
+
+4. Your new stack is now deployed! This will create a brand new pipeline, unconnected to already existing pipelines.
 
 This can be used to create new pipelines for each each environment you desire, with each branch having it's own pipeline and set of deployed resources. Deleting a branch will not delete the pipeline or resources, that will be discussed in the section IV.
 
