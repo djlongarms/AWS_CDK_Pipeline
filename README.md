@@ -27,7 +27,7 @@ When attempting to deploy this code for a project, the following should be done 
 
 8. Run the provided `deploy_all.py` script in the root folder of the project.
 
-9. Your initial stack or stacks is now deployed! You can view the progress of the pipeline in AWS CodePipeline.
+9. Your initial stack or set of stacks is now deployed! You can view the progress of the pipeline in AWS CodePipeline.
 
 This will create one environment for your resources, with a pipeline to deploy those resources as you add/modify them using the AWS CDK. This will be explained more in section V of the README.
 
