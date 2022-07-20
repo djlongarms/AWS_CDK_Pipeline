@@ -30,6 +30,7 @@
                     "region": null,
                     "stage_name": "StageDev",
                     "manual_approval": false,
+                    "approval_stage_name": "Approve",
                     "cli_profile": null
                 }
             ]
@@ -41,6 +42,7 @@
                     "region": null,
                     "stage_name": "StageOne",
                     "manual_approval": true,
+                    "approval_stage_name": "Approve",
                     "cli_profile": null
                 },
                 {
@@ -48,6 +50,7 @@
                     "region": null,
                     "stage_name": "StageTwo",
                     "manual_approval": true,
+                    "approval_stage_name": "Approve",
                     "cli_profile": null
                 },
                 {
@@ -55,6 +58,7 @@
                     "region": null,
                     "stage_name": "StageThree",
                     "manual_approval": false,
+                    "approval_stage_name": "Approve",
                     "cli_profile": null
                 }
             ]

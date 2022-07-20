@@ -108,7 +108,7 @@ class TensorGenericBackendPipelineStack(Stack):
 
             # Checks if user wants manual approval step after current stage
             if stage['manual_approval']:
-                post.append(pipelines.ManualApprovalStep("Approve"))
+                post.append(pipelines.ManualApprovalStep(stage['approval_stage_name']))
 
             # Adds stage to current pipeline
             deploy_stage = pipeline.add_stage(
