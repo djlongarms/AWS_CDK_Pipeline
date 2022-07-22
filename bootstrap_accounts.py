@@ -4,6 +4,9 @@ import json
 # Loads config file
 conf = json.load(open("config/config.json"))
 
+# Checks if user wants stack to create repo
+CREATE_REPO = conf['conditions']['CREATE_REPO']
+
 # Retrieves account number, region, and associated AWS CLI profile for tools account
 tools_account = conf['aws']['account']
 region = conf['aws']['region']
@@ -56,3 +59,9 @@ for branch in branches:
 
         # If reaching this point, bootstrap account and region with policy that trusts tools account to deploy to this account and region
         os.system(f"cdk bootstrap {account}/{region} --no-bootstrap-customer-key --cloudformation-execution-policies 'arn:aws:iam::aws:policy/AdministratorAccess' --trust {tools_account} --trust-for-lookup {tools_account} --profile {cli_profile} -c branch={branch}")
+
+# If user wants stack to create new repo, resets CREATE_REPO condition to true
+if CREATE_REPO:
+    conf['conditions']['CREATE_REPO'] = True
+    with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), "config/config.json"), 'w') as f:
+        json.dump(conf, f, indent=4)
