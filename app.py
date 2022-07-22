@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 import aws_cdk as cdk
-from stacks.pipeline_stack import TensorGenericBackendPipelineStack
 import json
+
+from stacks.pipeline_stack import TensorGenericBackendPipelineStack
 
 # Initializes App
 app = cdk.App()
@@ -10,7 +11,7 @@ app = cdk.App()
 conf = json.load(open("config/config.json"))
 branch = app.node.try_get_context("branch")
 
-# Initializes pipeline
+# Initializes pipeline 
 TensorGenericBackendPipelineStack(
     app, f"{conf['resource_ids']['pipeline_stack_id']}-{branch}",
     env = cdk.Environment(

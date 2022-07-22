@@ -1,9 +1,12 @@
 {
     "aws": {
+        "description": "Details for main account in which the code repo will be created.",
         "account": null,
-        "region": null
+        "region": null,
+        "cli_profile": null
     },
     "resource_ids": {
+        "description": "Stack IDs for pipeline/stage/stack resources deployed to accounts.",
         "pipeline_stack_id": "GenericPipelineStack",
         "repo_code_asset_id": "GenericCodeAsset",
         "repo_id": "GenericRepo",
@@ -12,33 +15,51 @@
         "stack_id": "GenericStack"
     },
     "resource_names": {
+        "description": "Names for pipeline/stage/stack resources deployed to accounts.",
         "repo_name": "GenericRepo"
     },
     "conditions": {
+        "description": "Conditions for creating resources in stack.",
         "CREATE_REPO": false
     },
     "branches": {
-        "main": {
-            "stages": [
-                {
-                    "stage_name": "QA",
-                    "manual_approval": true
-                },
-                {
-                    "stage_name": "Staging",
-                    "manual_approval": true
-                },
-                {
-                    "stage_name": "Production",
-                    "manual_approval": false
-                }
-            ]
-        },
         "dev": {
             "stages": [
                 {
-                    "stage_name": "Development",
-                    "manual_approval": false
+                    "account": null,
+                    "region": null,
+                    "stage_name": "StageDev",
+                    "manual_approval": false,
+                    "approval_stage_name": "Approve",
+                    "cli_profile": null
+                }
+            ]
+        },
+        "main": {
+            "stages": [
+                {
+                    "account": null,
+                    "region": null,
+                    "stage_name": "StageOne",
+                    "manual_approval": true,
+                    "approval_stage_name": "Approve",
+                    "cli_profile": null
+                },
+                {
+                    "account": null,
+                    "region": null,
+                    "stage_name": "StageTwo",
+                    "manual_approval": true,
+                    "approval_stage_name": "Approve",
+                    "cli_profile": null
+                },
+                {
+                    "account": null,
+                    "region": null,
+                    "stage_name": "StageThree",
+                    "manual_approval": false,
+                    "approval_stage_name": "Approve",
+                    "cli_profile": null
                 }
             ]
         }
