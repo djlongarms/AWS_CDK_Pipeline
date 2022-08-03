@@ -80,10 +80,7 @@ class TensorGenericBackendPipelineStack(Stack):
                     "BRANCH": branch
                 },
                 commands=[
-                    "npm install -g aws-cdk",
-                    "pip install -r requirements.txt",
-                    "pylint --rcfile=./.pylintrc `pwd`/source || pylint-exit -wfail -efail -cfail $?",
-                    "cdk synth -c branch=$BRANCH"
+                    "./.build.sh"
                 ]
             )
         )
