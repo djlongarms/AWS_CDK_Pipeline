@@ -1,8 +1,4 @@
 {
   "python.linting.pylintEnabled": true,
-  "python.linting.enabled": true,
-  "python.linting.pylintArgs": [
-      "--init-hook",
-      "import sys; sys.path.insert(0, '.')"
-  ]
+  "python.linting.enabled": true
 }
