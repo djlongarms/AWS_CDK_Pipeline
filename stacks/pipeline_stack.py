@@ -114,9 +114,7 @@ class TensorGenericBackendPipelineStack(Stack):
         post.append(pipelines.ManualApprovalStep(stage['approval_stage_name']))
 
       # Adds stage to current pipeline
-      deploy_stage = pipeline.add_stage(
+      pipeline.add_stage(
         deploy,
         post=post
       )
-
-      print(deploy_stage)
