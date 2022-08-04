@@ -23,5 +23,5 @@ class TensorGenericBackendStack(Stack):
   def __init__(self, scope: Construct, construct_id: str, conf, **kwargs) -> None:
     super().__init__(scope, construct_id, **kwargs)
 
-    print(conf)
+    print(conf) # This line is included for the sake of pylint, it can be deleted when conf is used elsewhere.
     
