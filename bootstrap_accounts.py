@@ -7,7 +7,7 @@ import sys
 
 # Loads config file
 with open("config/config.json", encoding='UTF-8') as conf_file:
-  conf = conf_file
+  conf = json.load(conf_file)
 
 # Checks if user wants stack to create repo
 CREATE_REPO = conf['conditions']['CREATE_REPO']
