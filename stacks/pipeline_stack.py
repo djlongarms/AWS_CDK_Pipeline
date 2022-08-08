@@ -74,13 +74,15 @@ class TensorGenericBackendPipelineStack(Stack):
         repository_name=conf['resource_names']['repo_name']
       )
 
+      source = pipelines.CodePipelineSource.code_commit(repo, branch)
+
     # Creates pipeline using given branch name as distinguishing factor
     pipeline = pipelines.CodePipeline(
       self, f"{conf['resource_ids']['pipeline_id']}-{branch}",
       cross_account_keys=True,
       synth=pipelines.ShellStep(
         "Synth",
-        input=pipelines.CodePipelineSource.code_commit(repo, branch),
+        input=source,
         env={
           "BRANCH": branch
         },
