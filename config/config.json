@@ -20,7 +20,8 @@
   },
   "conditions": {
     "description": "Conditions for creating resources in stack.",
-    "CREATE_REPO": false
+    "CREATE_REPO": false,
+    "REPO_LOCATION": "codecommit"
   },
   "branches": {
     "dev": {
