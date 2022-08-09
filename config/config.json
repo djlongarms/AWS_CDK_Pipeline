@@ -21,7 +21,7 @@
   "conditions": {
     "description": "Conditions for creating resources in stack.",
     "CREATE_REPO": false,
-    "REPO_LOCATION": "CodeCommit"
+    "REPO_LOCATION": "RepoLocation"
   },
   "repo_info": {
     "description": "This information is needed if the source repo is in a location other than CodeCommit.",
