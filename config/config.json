@@ -25,10 +25,10 @@
   },
   "repo_info": {
     "description": "This information is needed if the source repo is in a location other than CodeCommit.",
-    "repo_owner": "djlongarms",
-    "repo_name": "alt-source-cdk-pipeline-test",
-    "connection_id": "AltSourcesConnection",
-    "connection_name": "AltSourcesConnection"
+    "repo_owner": null,
+    "repo_name": null,
+    "connection_id": "GenericConnection",
+    "connection_name": "GenericConnection"
   },
   "branches": {
     "dev": {
