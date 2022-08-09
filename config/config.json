@@ -21,7 +21,14 @@
   "conditions": {
     "description": "Conditions for creating resources in stack.",
     "CREATE_REPO": false,
-    "REPO_LOCATION": "codecommit"
+    "REPO_LOCATION": "CodeCommit"
+  },
+  "repo_info": {
+    "description": "This information is needed if the source repo is in a location other than CodeCommit.",
+    "repo_owner": "djlongarms",
+    "repo_name": "alt-source-cdk-pipeline-test",
+    "connection_id": "AltSourcesConnection",
+    "connection_name": "AltSourcesConnection"
   },
   "branches": {
     "dev": {
