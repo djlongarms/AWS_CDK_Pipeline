@@ -4,6 +4,7 @@ multiple stages. The pipeline will deploy to them sequentially.
 This file should not be changed unless absolutely necessary."""
 from os import path
 import json
+import sys
 from constructs import Construct
 from aws_cdk import (
   Environment,
@@ -12,6 +13,7 @@ from aws_cdk import (
   aws_s3_assets,
   aws_codecommit as codecommit,
   pipelines as pipelines,
+  aws_codestarconnections as codestarconnections,
   CfnOutput,
   BundlingOptions,
   DockerImage
@@ -69,12 +71,28 @@ class TensorGenericBackendPipelineStack(Stack):
       )
     else:
       # Connects to already existing repo
-      repo = codecommit.Repository.from_repository_name(
-        self, conf['resource_ids']['repo_id'],
-        repository_name=conf['resource_names']['repo_name']
-      )
+      repo_location = conf["conditions"]["REPO_LOCATION"]
+      if repo_location == "CodeCommit":
+        repo = codecommit.Repository.from_repository_name(
+          self, conf['resource_ids']['repo_id'],
+          repository_name=conf['resource_names']['repo_name']
+        )
 
-      source = pipelines.CodePipelineSource.code_commit(repo, branch)
+        source = pipelines.CodePipelineSource.code_commit(repo, branch)
+      elif repo_location in ("GitHub", "BitBucket", "GitHubEnterpriseServer"):
+        connection = codestarconnections.CfnConnection(
+          self, conf["repo_info"]["connection_id"],
+          connection_name=conf["repo_info"]["connection_name"],
+          provider_type=repo_location
+        )
+
+        source = pipelines.CodePipelineSource.connection(
+          conf["repo_info"]["repo_owner"] + "/" + conf["repo_info"]["repo_name"], branch,
+          connection_arn=connection.attr_connection_arn
+        )
+      else:
+        print("Given Repo Location is not currently accepted.")
+        sys.exit(1)
 
     # Creates pipeline using given branch name as distinguishing factor
     pipeline = pipelines.CodePipeline(
