@@ -53,7 +53,7 @@ If you finish work done in a certain environment and wish to delete it, you can 
 
 Resources can be deployed using the AWS CDK. For a tutorial on how this works, here is a workshop great workshop that walks through the concept: https://cdkworkshop.com/
 
-There is a 'resources' folder in the 'tensor_generic_pipeline' folder where you can place code for resource creation. Importing these resources into the 'tensor_generic_backend_stack.py' file and calling them in the stack's '__init__' method will add them to the pipeline when you commit and push them to the repository.
+There is a 'resources' folder in the 'AWS_CDK_Pipeline' folder where you can place code for resource creation. Importing these resources into the 'resource_stack.py' file and calling them in the stack's '__init__' method will add them to the pipeline when you commit and push them to the repository.
 
 Since each branch has its own pipeline, pushing to one branch will only deploy/modify resources in that environment without affecting the separate environments.
 

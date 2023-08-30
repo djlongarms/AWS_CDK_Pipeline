@@ -13,7 +13,7 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 
 # Resource stack for deployment through pipeline
-class TensorGenericBackendStack(Stack):
+class GenericBackendStack(Stack):
 
     def __init__(self, scope: Construct, construct_id: str, conf, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)

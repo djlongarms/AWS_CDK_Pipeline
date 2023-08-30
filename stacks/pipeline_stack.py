@@ -13,10 +13,10 @@ from aws_cdk import (
     DockerImage
 )
 
-from .pipeline_stage import TensorGenericBackendStage
+from .pipeline_stage import GenericBackendStage
 
 # Pipeline Stack class
-class TensorGenericBackendPipelineStack(Stack):
+class GenericBackendPipelineStack(Stack):
     def __init__(self, scope: Construct, id: str, conf, branch, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
 
@@ -93,7 +93,7 @@ class TensorGenericBackendPipelineStack(Stack):
         # Iterates over stages wanted for the current branch
         for stage in branch_info['stages']:
             # Creates deploy stage for pipeline to automatically deploy code from given branch
-            deploy = TensorGenericBackendStage(
+            deploy = GenericBackendStage(
                 self, f"{conf['resource_ids']['pipeline_stage_id']}-{stage['stage_name']}",
                 env=Environment(
                     account=stage['account'],
