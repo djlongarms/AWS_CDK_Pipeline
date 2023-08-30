@@ -1,7 +1,7 @@
 
 # I. Generic Pipeline Project
 
-This code is meant to serve as the basis for backend projects being built using the AWS CDK to facilitate easier creation of CICD Pipelines in any account in any region.
+This code is meant to serve as the basis for projects being built using the AWS CDK to facilitate easier creation of CICD Pipelines in any account in any region.
 
 This is achieved by creating a stack which connects to an AWS CodeCommit repository and running code from each branch desired by the developers into its own pipeline to create different environments as desired.
 
